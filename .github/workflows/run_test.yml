@@ -33,5 +33,5 @@ jobs:
       - name: Display files
         run: ls
       - name: Display path
-        run: pws
+        run: pwd
       
