@@ -56,11 +56,6 @@ jobs:
           AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
           SOURCE_DIR: 'allure-history'      # optional: defaults to entire repository
           # DEST_DIR: ${{ env.GITHUB_RUN_NUMBER }}
-      - name: Display files and path
-        run: |
-          cd allure-results
-          ls
-          pwd
       - name: Post the link to the report
         if: always()
         uses: Sibz/github-status-action@v1 
@@ -70,4 +65,10 @@ jobs:
             state: 'success'
             sha: ${{ github.sha }}
             target_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com/index.html
+      - name: Display files and path
+        run: |
+          cd allure-results
+          ls
+          pwd
+            
     
