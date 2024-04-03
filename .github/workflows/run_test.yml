@@ -56,9 +56,6 @@ jobs:
           AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
           SOURCE_DIR: 'allure-history'      # optional: defaults to entire repository
           # DEST_DIR: ${{ env.GITHUB_RUN_NUMBER }}
-          run: |
-           printenv | grep AWS
-
       - name: Post the link to the report
         if: always()
         uses: Sibz/github-status-action@v1
