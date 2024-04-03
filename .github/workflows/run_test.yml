@@ -30,4 +30,8 @@ jobs:
       - name: Generate Coverage Report
         run: |
           coverage report -m
+      - name: Display files
+        run: ls
+      - name: Display path
+        run: pws
       
