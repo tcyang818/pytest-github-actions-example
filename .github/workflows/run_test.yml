@@ -36,41 +36,45 @@ jobs:
         run: |
           ls
           pwd
+      
+
       # - name: Archive code coverage results
       #   uses: actions/upload-artifact@v4
       #   with:
       #     name: code-coverage-report
       #     path: test_report.js
       #     retention-days: 5
-      - name: allure-html-report-s3-website
-        uses: PavanMudigonda/allure-html-report-aws-s3-website@v1.0
-        with:
-          report_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com
-          allure_results: allure-results
-          allure_history: allure-history
-          allure_report: allure-report
-          keep_reports: 10
-          args: --acl public-read --follow-symlinks
-        env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
-          SOURCE_DIR: 'allure-history'      # optional: defaults to entire repository
-          # DEST_DIR: ${{ env.GITHUB_RUN_NUMBER }}
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1 
-        with: 
-            authToken: ${{secrets.GITHUB_TOKEN}}
-            context: 'Test Results Link'
-            state: 'success'
-            sha: ${{ github.sha }}
-            target_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com/index.html
-      - name: Display files and path
-        run: |
-          cd allure-results
-          ls
-          pwd
+
+
+      # - name: allure-html-report-s3-website
+      #   uses: PavanMudigonda/allure-html-report-aws-s3-website@v1.0
+      #   with:
+      #     report_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com
+      #     allure_results: allure-results
+      #     allure_history: allure-history
+      #     allure_report: allure-report
+      #     keep_reports: 10
+      #     args: --acl public-read --follow-symlinks
+      #   env:
+      #     AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
+      #     SOURCE_DIR: 'allure-history'      # optional: defaults to entire repository
+      #     # DEST_DIR: ${{ env.GITHUB_RUN_NUMBER }}
+      # - name: Post the link to the report
+      #   if: always()
+      #   uses: Sibz/github-status-action@v1 
+      #   with: 
+      #       authToken: ${{secrets.GITHUB_TOKEN}}
+      #       context: 'Test Results Link'
+      #       state: 'success'
+      #       sha: ${{ github.sha }}
+      #       target_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com/index.html
+      # - name: Display files and path
+      #   run: |
+      #     cd allure-results
+      #     ls
+      #     pwd
             
     
