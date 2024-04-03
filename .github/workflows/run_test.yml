@@ -1,4 +1,4 @@
-name: Run Unit Test via Pytest
+name: Run Test via Pytest
 
 on: [push]
 
@@ -7,11 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
-
+        testcase:
+          - test_cal.py
+          - test_index.py
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
@@ -26,7 +27,7 @@ jobs:
         continue-on-error: true
       - name: Test with pytest
         run: |
-          coverage run -m pytest  -v -s --alluredir allure-results
+          coverage run -m pytest -v -s tests/${{ matrix.testcase }} --alluredir allure-results
         continue-on-error: true
       - name: Generate Coverage Report
         run: |
