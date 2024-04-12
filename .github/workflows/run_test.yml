@@ -32,6 +32,9 @@ jobs:
       - name: Generate Coverage Report
         run: |
           coverage report -m
+      - name: Sleep
+        run: |
+          sleep 20
       - name: Display files and path
         run: |
           ls
@@ -41,7 +44,7 @@ jobs:
           cd allure-results
           ls
           pwd
-
+      
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
