@@ -32,9 +32,6 @@ jobs:
       - name: Generate Coverage Report
         run: |
           coverage report -m
-      - name: Sleep
-        run: |
-          sleep 20
       - name: Display files and path
         run: |
           ls
@@ -44,17 +41,12 @@ jobs:
           cd allure-results
           ls
           pwd
-      
-  upload:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v3
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
           name: allure-results-${{ matrix.testcase }}-${{ github.run_id }}
           path: allure-results
+          retention-days: 5
 
       - name: Display allure files and path
         run: |
@@ -63,6 +55,27 @@ jobs:
           cd allure-results
           ls
           pwd
+
+  download:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Get log files
+        uses: actions/download-artifact@v4
+        with:
+          name: allure raw log
+          path: ./allure-results
+      - name: Display allure files and path
+        run: |
+          ls
+          pwd
+          cd allure-results
+          ls
+          pwd
+
+
 
       # - name: allure-html-report-s3-website
       #   uses: PavanMudigonda/allure-html-report-aws-s3-website@v1.0

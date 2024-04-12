@@ -1,5 +1,4 @@
-import pytest
-import logging
+
 
 def test_001():
     print(f"test log 001>>>>>>>")

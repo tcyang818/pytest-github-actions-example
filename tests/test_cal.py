@@ -1,5 +1,3 @@
-import pytest
-import logging
 
 def test_calculate():
     assert 2*2 == 4
