@@ -27,7 +27,7 @@ jobs:
         continue-on-error: true
       - name: Test with pytest
         run: |
-          coverage run -m pytest -v -s tests/${{ matrix.testcase }} --alluredir allure-results
+          coverage run -m pytest -v -s tests/${{ matrix.testcase }} --alluredir=./allure-results
         continue-on-error: true
       - name: Generate Coverage Report
         run: |
