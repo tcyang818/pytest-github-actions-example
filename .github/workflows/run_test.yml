@@ -62,19 +62,22 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Get log files
-        uses: actions/download-artifact@v4
-        with:
-          name: allure raw log
-          path: allure-results
-          merge-multiple: true
-      - name: Display allure files and path
-        run: |
-          ls
-          pwd
-          cd allure-results
-          ls
-          pwd
+      # - name: Get log files
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: allure raw log
+      #     path: allure-results
+      #     merge-multiple: true
+      # - name: Display allure files and path
+      #   run: |
+      #     ls
+      #     pwd
+      #     cd allure-results
+      #     ls
+      #     pwd
+      - uses: actions/download-artifact@v4
+      - name: Display structure of downloaded files
+        run: ls -R
 
 
 
