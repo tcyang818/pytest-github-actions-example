@@ -75,9 +75,15 @@ jobs:
       #     cd allure-results
       #     ls
       #     pwd
-      - uses: actions/download-artifact@v4
+      
       - name: Display structure of downloaded files
-        run: ls -R
+        uses: actions/download-artifact@v4
+        with:
+          path: allure-results
+          pattern: allure-results-*
+          merge-multiple: true
+      - run: ls -R allure-results
+        # run: ls -R
 
 
 
