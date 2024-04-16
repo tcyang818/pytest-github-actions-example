@@ -72,7 +72,7 @@ jobs:
 
       - name: Install allure
         run : |
-          eaho "Install allure"
+          echo "Install allure"
           apk update && \
           apk add --no-cache bash wget unzip && \
           rm -rf /var/cache/apk/* \
