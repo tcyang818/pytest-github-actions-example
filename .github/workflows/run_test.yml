@@ -71,7 +71,8 @@ jobs:
           ls -R allure-results
 
       - name: allure-html-report-s3-website
-        uses: tcyang818/allure-html-report-aws-s3-website@v1.0
+        uses: tcyang818/allure-html-reporter-aws-s3-website@v1.0
+              
         with:
           report_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com
           allure_results: allure-results
