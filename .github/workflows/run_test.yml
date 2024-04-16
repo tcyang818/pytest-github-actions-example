@@ -60,33 +60,18 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      # - name: Get log files
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: allure raw log
-      #     path: allure-results
-      #     merge-multiple: true
-      # - name: Display allure files and path
-      #   run: |
-      #     ls
-      #     pwd
-      #     cd allure-results
-      #     ls
-      #     pwd
-      
       - name: Display structure of downloaded files
         uses: actions/download-artifact@v4
         with:
           path: allure-results
           pattern: allure-results-*
           merge-multiple: true
-      - run: ls -R allure-results
-        # run: ls -R
+      - run: |
+          ls -R
+          ls -R allure-results
 
       - name: allure-html-report-s3-website
-        uses: PavanMudigonda/allure-html-report-aws-s3-website@v1.0
+        uses: tcyang818/allure-html-report-aws-s3-website@v1.0
         with:
           report_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com
           allure_results: allure-results
