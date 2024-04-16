@@ -73,7 +73,7 @@ jobs:
       - name: Install allure
         run : |
           echo "Install allure"
-          apk update && \
+          sudo apk update && \
           apk add --no-cache bash wget unzip && \
           rm -rf /var/cache/apk/* \
           && apk upgrade \
