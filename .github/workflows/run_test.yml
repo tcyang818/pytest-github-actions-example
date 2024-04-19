@@ -70,23 +70,9 @@ jobs:
           ls -R
           ls -R allure-results
 
-      - name: Install allure
-        run : |
-          echo "Install allure"
-          sudo apk update && \
-          apk add --no-cache bash wget unzip && \
-          rm -rf /var/cache/apk/* \
-          && apk upgrade \
-          && apk add ca-certificates \
-          && update-ca-certificates \
-          && apk add --update coreutils && rm -rf /var/cache/apk/*   \ 
-          && apk add --update openjdk11 tzdata curl unzip bash \
-          && apk add --no-cache nss \
-          && rm -rf /var/cache/apk/*
-
       - name: allure-html-report-s3-website
-        uses: tcyang818/allure-html-reporter-aws-s3-website@v1.0
-              
+        # uses: tcyang818/allure-html-reporter-aws-s3-website@v1.0
+        uses: ./github/workflows/scripts/action.yml
         with:
           report_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com
           allure_results: allure-results
@@ -101,15 +87,17 @@ jobs:
           AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
           SOURCE_DIR: 'allure-history'      # optional: defaults to entire repository
           # DEST_DIR: ${{ env.GITHUB_RUN_NUMBER }}
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1 
-        with: 
-            authToken: ${{secrets.GITHUB_TOKEN}}
-            context: 'Test Results Link'
-            state: 'success'
-            sha: ${{ github.sha }}
-            target_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com/index.html
+
+      # - name: Post the link to the report
+      #   if: always()
+      #   uses: Sibz/github-status-action@v1 
+      #   with: 
+      #       authToken: ${{secrets.GITHUB_TOKEN}}
+      #       context: 'Test Results Link'
+      #       state: 'success'
+      #       sha: ${{ github.sha }}
+      #       target_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com/index.html
+
       - name: Display files and path
         run: |
           cd allure-results
