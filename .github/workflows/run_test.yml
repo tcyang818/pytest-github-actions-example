@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Display structure of downloaded files
         uses: actions/download-artifact@v4
         with:
@@ -71,10 +71,11 @@ jobs:
       - run: |
           ls -R
           ls -R allure-results
+          pwd
 
       - name: allure-html-report-s3-website
         # uses: tcyang818/allure-html-reporter-aws-s3-website@v1.0
-        uses: ./.github/workflows/scripts/action.yml
+        uses: .github/workflows/scripts/action.yml
         with:
           report_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com
           allure_results: allure-results
