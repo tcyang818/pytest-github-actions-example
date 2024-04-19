@@ -75,7 +75,7 @@ jobs:
 
       - name: allure-html-report-s3-website
         # uses: tcyang818/allure-html-reporter-aws-s3-website@v1.0
-        uses: .github/scripts/action.yml
+        uses: ./.github/scripts
         with:
           report_url: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com
           allure_results: allure-results
